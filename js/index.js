@@ -74,11 +74,11 @@ function createCardMafie() {
         let mafia = mafie[id];
 
         let cardContainer = document.createElement('div');
-        cardContainer.className = 'w-48 h-56 inline-block m-20 border border-black rounded-md'; // Aumenta l'altezza e la larghezza del contenitore della card
+        cardContainer.className = ' inline-block m-20 border border-black rounded-md'; // Aumenta l'altezza e la larghezza del contenitore della card
         cardMafie.appendChild(cardContainer);
 
         let card = document.createElement('div');
-        card.className = "border border-black rounded-md";
+        card.className = "w-48 h-56border border-black rounded-md";
         cardContainer.appendChild(card);
 
         let imgContainer = document.createElement('div');
