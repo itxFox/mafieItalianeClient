@@ -162,8 +162,22 @@ function createCarousel() {
 
         let leggiArticolo = document.createElement('div');
         leggiArticolo.className = "bg-red-700 w-fit p-1 mx-auto text-lg text-black rounded";
-        leggiArticolo.innerHTML = '<a href="att.html">LEGGI ARTICOLO</a>';
+        leggiArticolo.innerHTML = '<button>LEGGI ARTICOLO</button>';
         divTitoloAttentato.appendChild(leggiArticolo);
+
+        // Aggiungi un gestore di eventi onclick per ottenere il nome della mafia quando si clicca su "SCOPRI DI PIU"
+        divTitoloAttentato.querySelector('button').onclick = function (event) {
+            event.preventDefault(); // Previeni il comportamento predefinito del link
+            readAboutArticle(attentato.id); // Passa il nome della mafia alla funzione readAboutMafia()
+        };
     }
+}
+
+
+function readAboutArticle(attentatoId) {
+    window.idAttentato = attentatoId;
+    console.log("Hai cliccato su:", window.idAttentato);
+    // Reindirizza alla pagina org.html con il parametro della query string 'mafiaNome'
+    window.location.href = "att.html?attentatoId=" + encodeURIComponent(attentatoId);
 }
 

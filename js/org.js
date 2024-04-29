@@ -49,26 +49,29 @@ if (mafiaDetails) {
     img.src = mafiaDetails.logo;
     document.getElementById('logoMafia').appendChild(img);
 
+    // Aggiungi un evento click all'immagine del logo mafia
+    img.addEventListener('click', function() {
+        // Naviga alla pagina index.html
+        window.location.href = 'index.html';
+    });
+
     let descrizione = document.getElementById('storiaMafia');
     descrizione.innerText = mafiaDetails.descrizione_approfondita;
 
     // Assicurati che 'immagini' sia un array prima di procedere
     if (Array.isArray(mafiaDetails.immagini)) {
-        
         let immaginiMafia = document.getElementById('immaginiMafia');
 
         mafiaDetails.immagini.forEach(function (immagineSrc) {
-
             let img = document.createElement('img');
             img.className = "m-4 w-96"; 
             img.src = immagineSrc;
             immaginiMafia.appendChild(img);
             immaginiMafia.innerHTML += "<br><br>";
-            // Aggiungi le immagini ad un elemento nella tua pagina HTML
-            // document.getElementById('containerImmagine').appendChild(img);
         });
     }
 }
+
 
 
 
