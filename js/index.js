@@ -58,12 +58,13 @@ function getAttentati() {
 Promise.all([getMafie(), getDettagli(), getAttentati()])
     .then(() => {
         // Dopo che i dati sono stati caricati, puoi fare qualcosa con essi
-        //console.log(mafie);
-        //console.log(dettagli);
-        //console.log(attentati);
+        sessionStorage.setItem('mafie', JSON.stringify(mafie));
+        sessionStorage.setItem('dettagli', JSON.stringify(dettagli));
+        sessionStorage.setItem('attentati', JSON.stringify(attentati));
         createCardMafie();
-        createCarousel(); 
+        createCarousel();
     });
+
 
 // Funzione per creare le card delle mafie
 function createCardMafie() {
@@ -100,21 +101,36 @@ function createCardMafie() {
 
         let divScopriDiPiu = document.createElement('div');
         divScopriDiPiu.className = "bg-red-700 w-fit p-1 mx-auto text-lg text-black rounded";
-        divScopriDiPiu.innerHTML = '<a href="/org.html">SCOPRI DI PIU</a>';
+        divScopriDiPiu.innerHTML = '<button class="scopri-di-piu">SCOPRI DI PIU</button>'; // Aggiungi un identificatore per il link
         divOrganizzazione.appendChild(divScopriDiPiu);
+
+        // Aggiungi un gestore di eventi onclick per ottenere il nome della mafia quando si clicca su "SCOPRI DI PIU"
+        divScopriDiPiu.querySelector('button').onclick = function (event) {
+            event.preventDefault(); // Previeni il comportamento predefinito del link
+            readAboutMafia(mafia.nome); // Passa il nome della mafia alla funzione readAboutMafia()
+        };
     }
 }
 
+function readAboutMafia(mafiaNome) {
+    window.nomeMafia = mafiaNome;
+    console.log("Hai cliccato su:", window.nomeMafia);
+    // Reindirizza alla pagina org.html con il parametro della query string 'mafiaNome'
+    window.location.href = "org.html?mafiaNome=" + encodeURIComponent(mafiaNome);
+}
 
-function createCarousel(){
+
+
+function createCarousel() {
     let carousel = document.getElementById('carousel');
+    let isFirstItem = true;
 
     for (let id in attentati) {
         let attentato = attentati[id];
 
 
         let contenitoreItem = document.createElement('div');
-        contenitoreItem.className = "hidden duration-700 ease-in-out flex items-center justify-center";
+        contenitoreItem.className = isFirstItem ? "block duration-700 ease-in-out flex items-center justify-center" : "hidden duration-700 ease-in-out flex items-center justify-center";
         contenitoreItem.setAttribute('data-carousel-item', '');
         carousel.appendChild(contenitoreItem);
 
@@ -146,10 +162,8 @@ function createCarousel(){
 
         let leggiArticolo = document.createElement('div');
         leggiArticolo.className = "bg-red-700 w-fit p-1 mx-auto text-lg text-black rounded";
-        leggiArticolo.innerText = "LEGGI ARTICOLO";
+        leggiArticolo.innerHTML = '<a href="att.html">LEGGI ARTICOLO</a>';
         divTitoloAttentato.appendChild(leggiArticolo);
     }
 }
-
-
 
