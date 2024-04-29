@@ -25,8 +25,11 @@ function findDetailsByAttentatoId(attentati, mafie, dettagli, attentatoId) {
                 // Trova l'ID della mafia corrispondente all'attentato
                 let mafiaId = null;
                 for (let dettaglio in dettagli) {
+
                     if (dettagli.hasOwnProperty(dettaglio)) {
-                        if (dettagli[dettaglio].id === attentato.id) {
+
+                        if (dettagli[dettaglio].attentati[0] === attentato.id || dettagli[dettaglio].attentati[1] === attentato.id) {
+                            
                             mafiaId = dettagli[dettaglio].id;
                             break;
                         }
