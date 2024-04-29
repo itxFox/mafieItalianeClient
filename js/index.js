@@ -86,7 +86,7 @@ function createCardMafie() {
         card.appendChild(imgContainer);
 
         let img = document.createElement('img');
-        img.className = 'object-cover w-full h-full rounded-t-md';
+        img.className = 'object-cover w-48 h-44 rounded-t-md';
         img.src = mafia.logo;
         imgContainer.appendChild(img);
 
@@ -123,14 +123,13 @@ function readAboutMafia(mafiaNome) {
 
 function createCarousel() {
     let carousel = document.getElementById('carousel');
-    let isFirstItem = true;
 
     for (let id in attentati) {
         let attentato = attentati[id];
 
 
         let contenitoreItem = document.createElement('div');
-        contenitoreItem.className = isFirstItem ? "block duration-700 ease-in-out flex items-center justify-center" : "hidden duration-700 ease-in-out flex items-center justify-center";
+        contenitoreItem.className = "duration-700 ease-in-out flex items-center justify-center m-6";
         contenitoreItem.setAttribute('data-carousel-item', '');
         carousel.appendChild(contenitoreItem);
 
@@ -145,7 +144,7 @@ function createCarousel() {
         // Verifica se attentato.immagine è definito prima di usarlo
         if (attentato.immagine) {
             let img = document.createElement('img');
-            img.className = "w-full h-full rounded-t-md";
+            img.className = "w-full h-52 rounded-t-md";
             img.src = attentato.immagine;
             bordoCard.appendChild(img);
         }
